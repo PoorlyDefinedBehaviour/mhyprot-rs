@@ -3,7 +3,7 @@
 
 #include "logger.hpp"
 #include "win_utils.hpp"
-#include "mhyprot.hpp"
+#include "cvrl.hpp"
 
 namespace sup
 {
@@ -25,13 +25,13 @@ namespace sup
 		//
 		// read dos-header using vulnerable driver
 		//
-		IMAGE_DOS_HEADER dos_header = mhyprot::driver_impl::
+		IMAGE_DOS_HEADER dos_header = cvrl::driver_impl::
 			read_user_memory<IMAGE_DOS_HEADER>(process_id, process_base_address);
 
 		//
 		// read nt-header using vulnerable driver
 		//
-		IMAGE_NT_HEADERS nt_header = mhyprot::driver_impl::
+		IMAGE_NT_HEADERS nt_header = cvrl::driver_impl::
 			read_user_memory<IMAGE_NT_HEADERS>(process_id, process_base_address + dos_header.e_lfanew);
 
 		//

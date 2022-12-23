@@ -4,7 +4,7 @@
 
 #include "logger.hpp"
 #include "win_utils.hpp"
-#include "mhyprot.hpp"
+#include "cvrl.hpp"
 
 #define CHECK_SC_MANAGER_HANDLE(x, ret_type)												\
 if (!CHECK_HANDLE(x))																		\

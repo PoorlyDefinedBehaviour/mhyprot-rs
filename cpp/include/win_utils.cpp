@@ -141,7 +141,7 @@ uint64_t win_utils::obtain_sysmodule_address(
 		}
 
 		if (target_module_name.compare(module_name) == 0 ||
-			std::string(module_name).find("mhyprot") != std::string::npos)
+			std::string(module_name).find("cvrl") != std::string::npos)
 		{
 			logger::log("[<] found\n");
 			return module_address;
