@@ -17,9 +17,12 @@ uint32_t win_utils::find_process_id(const std::string_view process_name)
 
 	processentry.dwSize = sizeof(MODULEENTRY32);
 
+	auto process_name_wstring = std::wstring(process_name.begin(), process_name.end());
+	auto process_name_wchart = process_name_wstring.c_str();
+
 	while (Process32Next(snapshot.get(), &processentry) == TRUE)
 	{
-		if (process_name.compare(processentry.szExeFile) == 0)
+		if (wcscmp(process_name_wchart, processentry.szExeFile) == 0)
 		{
 			return processentry.th32ProcessID;
 		}
@@ -56,8 +59,7 @@ uint64_t win_utils::find_base_address(const uint32_t process_id)
 //
 uint64_t win_utils::obtain_sysmodule_address(
 	const std::string_view target_module_name,
-	bool debug_prints
-)
+	bool debug_prints)
 {
 	const HMODULE module_handle = GetModuleHandle(TEXT("ntdll.dll"));
 
@@ -95,8 +97,7 @@ uint64_t win_utils::obtain_sysmodule_address(
 			SystemModuleInformation,
 			buffer,
 			alloc_size,
-			&needed_size
-		);
+			&needed_size);
 
 		if (!NT_SUCCESS(status) && status != STATUS_INFO_LENGTH_MISMATCH)
 		{
@@ -122,7 +123,7 @@ uint64_t win_utils::obtain_sysmodule_address(
 	PSYSTEM_MODULE_INFORMATION module_information = (PSYSTEM_MODULE_INFORMATION)buffer;
 
 	logger::log("[>] looking for %s in sysmodules...\n", target_module_name.data());
-	
+
 	for (ULONG i = 0; i < module_information->Count; i++)
 	{
 		SYSTEM_MODULE_INFORMATION_ENTRY module_entry = module_information->Module[i];

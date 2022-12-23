@@ -20,11 +20,11 @@ SC_HANDLE service_utils::create_service(const std::string_view driver_path)
 
     SC_HANDLE cvrl_service_handle = CreateService(
         sc_manager_handle,
-        CVRL_SERVICE_NAME,
-        CVRL_DISPLAY_NAME,
+        (LPCWSTR)CVRL_SERVICE_NAME,
+        (LPCWSTR)CVRL_DISPLAY_NAME,
         SERVICE_START | SERVICE_STOP | DELETE,
         SERVICE_KERNEL_DRIVER, SERVICE_DEMAND_START, SERVICE_ERROR_IGNORE,
-        driver_path.data(), nullptr, nullptr, nullptr, nullptr, nullptr);
+        (LPCWSTR)(driver_path.data()), nullptr, nullptr, nullptr, nullptr, nullptr);
 
     if (!CHECK_HANDLE(cvrl_service_handle))
     {
@@ -36,7 +36,7 @@ SC_HANDLE service_utils::create_service(const std::string_view driver_path)
 
             return OpenService(
                 sc_manager_handle,
-                CVRL_SERVICE_NAME,
+                (LPCWSTR)CVRL_SERVICE_NAME,
                 SERVICE_START | SERVICE_STOP | DELETE);
         }
 
