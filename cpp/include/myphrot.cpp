@@ -1,8 +1,9 @@
-
 #include "./myphrot.h"
+#include <iostream>
 
 BlobstoreClient::BlobstoreClient() {}
 
-std::unique_ptr<BlobstoreClient> new_blobstore_client() {
-  return std::unique_ptr<BlobstoreClient>(new BlobstoreClient());
+void test_123() {
+//   return std::unique_ptr<BlobstoreClient>(new BlobstoreClient());
 }
+

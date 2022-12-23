@@ -6,4 +6,4 @@ public:
   BlobstoreClient();
 };
 
-std::unique_ptr<BlobstoreClient> new_blobstore_client();
+void test_123();
