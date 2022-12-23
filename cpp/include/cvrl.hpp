@@ -10,7 +10,7 @@
 
 #define CVRL_SERVICE_NAME "cvrl2"
 #define CVRL_DISPLAY_NAME "cvrl2"
-#define CVRL_SYSFILE_NAME "cvrl2.sys"
+#define CVRL_SYSFILE_NAME "cvrl.sys"
 #define CVRL_SYSMODULE_NAME "cvrl2.sys"
 
 #define CVRL_DEVICE_NAME "\\\\?\\\\cvrl2"
