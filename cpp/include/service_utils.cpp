@@ -90,7 +90,13 @@ bool service_utils::delete_service(SC_HANDLE service_handle, bool close_on_fail,
 //
 bool service_utils::start_service(SC_HANDLE service_handle)
 {
-    return StartService(service_handle, 0, nullptr);
+    const DWORD SERVICE_ALREADY_RUNNING_ERROR_CODE = 0x420;
+    if (StartService(service_handle, 0, nullptr))
+    {
+        return true;
+    }
+
+    return GetLastError() == SERVICE_ALREADY_RUNNING_ERROR_CODE;
 }
 
 //
