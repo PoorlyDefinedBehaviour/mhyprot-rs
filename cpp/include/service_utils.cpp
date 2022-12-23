@@ -96,7 +96,17 @@ bool service_utils::start_service(SC_HANDLE service_handle)
         return true;
     }
 
-    return GetLastError() == SERVICE_ALREADY_RUNNING_ERROR_CODE;
+    auto last_error_code = GetLastError();
+    if (last_error_code == SERVICE_ALREADY_RUNNING_ERROR_CODE)
+    {
+        logger::log("service already running\n");
+        return true;
+    }
+    else
+    {
+        logger::log("unable to start service. error_code=(0x%lX)\n", last_error_code);
+        return false;
+    }
 }
 
 //
